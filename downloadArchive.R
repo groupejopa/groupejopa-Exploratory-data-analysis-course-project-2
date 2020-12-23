@@ -1,3 +1,4 @@
+
 # Download archive file, if it does not exist
 
 archiveFile <- "NEI_data.zip"
@@ -5,6 +6,13 @@ archiveFile <- "NEI_data.zip"
 if(!file.exists(archiveFile)) {
     
     archiveURL <- "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2FNEI_data.zip"
+    
+   # make sure the site is live, if it is not live stop function terminate the program
+  check.url <- file(archiveURL,"r")
+
+  if (!isOpen(check.url)) {
+    stop(paste("There's a problem with the data:",geterrmessage()))
+  }
     
     download.file(url=archiveURL,destfile=archiveFile)
 }
